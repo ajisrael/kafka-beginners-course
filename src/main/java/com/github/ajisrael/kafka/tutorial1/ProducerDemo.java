@@ -1,4 +1,4 @@
-package com.github.ajisrael.tutorial1;
+package com.github.ajisrael.kafka.tutorial1;
 
 import java.util.Properties;
 

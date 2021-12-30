@@ -1,4 +1,4 @@
-package com.github.ajisrael.tutorial1;
+package com.github.ajisrael.kafka.tutorial1;
 
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
-public class ProducerDemoKeys {
+public class ProducerDemoWithCallback {
     public static void main(String[] args) {
 
-        Logger logger = LoggerFactory.getLogger(ProducerDemoKeys.class);
+        Logger logger = LoggerFactory.getLogger(ProducerDemoWithCallback.class);
 
         String bootstrapServers = "127.0.0.1:9092";
 
@@ -25,14 +25,10 @@ public class ProducerDemoKeys {
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
 
         // Loop for generating some data
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
 
-            String topic = "first_topic";
-            String key = "id_" + Integer.toString(i);
-            String value = "Hello world " + Integer.toString(i);
-
-            // Create producer record - a key's hash determines which partition the record goes to
-            ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic, key, value);
+            // Create producer record
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>("first_topic", "Testing partitions " + Integer.toString(i));
 
             // Send data - asynchronous
             producer.send(record, new Callback() {
